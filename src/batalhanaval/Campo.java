@@ -22,18 +22,19 @@ public class Campo {
     
     
     public boolean verificarPosicao(int num, int linha,int coluna){
-        int cont = linha+num+1;
-        for(int i=linha-1;i<=cont;i++){
-            if (campo[i][coluna]!=' '){
+        int cont = linha+num;
+        for(int i=Math.max(coluna-1,0);i<=cont;i++){
+            if (campo[linha][i]!=' '){
                 return false;
             }
         }
-        for(int i=coluna;i<=num;i++){
-            if(campo[linha-1][i]!=' ' && campo[linha+1][i]!=' '){
+        for(int i=Math.max(0,coluna-1);i<=Math.min(num,7);i++){
+            if(campo[Math.max(0,linha-1)][i]!=' ' || campo[Math.min(7,linha+1)][i]!=' '){
                 return false;
             }
         }     
         return true;
+
     }
     
     public String[] getLinhas(){
@@ -52,7 +53,7 @@ public class Campo {
     public void adicionarArma(String tipo,int linha,int coluna){
         switch (tipo){
             case "submarino" -> {
-                if(this.verificarPosicao(1, linha, coluna )|| this.quantSub>0){
+                if(this.verificarPosicao(1, linha, coluna )&& this.quantSub>0 ){
                     campo[linha][coluna] = 's';
                     this.quantSub--;
                 }
@@ -61,7 +62,7 @@ public class Campo {
                 }
             }
             case "cruzador" ->{
-                if(this.verificarPosicao(2, linha, coluna) || this.quantCruz>0){
+                if(this.verificarPosicao(2, linha, coluna) && this.quantCruz>0 && linha+1>7){
                     campo[linha][coluna] = 'c';
                     campo[linha+1][coluna] = 'c';
                     this.quantCruz--;
@@ -71,7 +72,7 @@ public class Campo {
                 }
             }
             case "porta-avioes" ->{
-                if(this.verificarPosicao(5, linha, coluna) || this.quantPa>0){
+                if(this.verificarPosicao(5, linha, coluna) && this.quantPa>0 && linha+4>7){
                     for(int i=coluna;i<=4;i++){
                         campo[i][coluna] = 'p';
                         this.quantPa--;
@@ -94,11 +95,11 @@ public class Campo {
             case "A": return 1;
             case "B": return 2;
             case "C": return 3;
-            case "D": return 3;
-            case "E": return 3;
-            case "F": return 3;
-            case "G": return 3;
-            case "H": return 3;
+            case "D": return 4;
+            case "E": return 5;
+            case "F": return 6;
+            case "G": return 7;
+            case "H": return 8;
         }
         return 0;
     }
@@ -111,9 +112,6 @@ public class Campo {
         for (int i=0;i<campo.length;i++){
             System.out.print(" "+ this.getLinhas()[i] +" ");
             for(int j=0;j<campo[i].length;j++){
-                if(campo[i][j]!=' '){
-                    System.out.print("|"+ campo[i][j] + "| ");
-               }
                 System.out.print("| "+ campo[i][j] + "| ");
                 
             }
