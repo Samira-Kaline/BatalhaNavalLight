@@ -22,14 +22,18 @@ public class Campo {
     
     
     public boolean verificarPosicao(int num, int linha,int coluna){
-        int cont = linha+num;
-        for(int i=Math.max(coluna-1,0);i<=cont;i++){
-            if (campo[linha][i]!=' '){
+        int cont = coluna+num;
+        for(int i=Math.max(coluna-1,0);i<Math.min(cont, 7);i++){
+            if (campo[linha][i]=='s' || campo[linha][i]=='c' || campo[linha][i]=='p'){
                 return false;
             }
         }
-        for(int i=Math.max(0,coluna-1);i<=Math.min(num,7);i++){
-            if(campo[Math.max(0,linha-1)][i]!=' ' || campo[Math.min(7,linha+1)][i]!=' '){
+        for(int i=Math.max(0,coluna-1);i<Math.min(linha+num,7);i++){
+  
+            if((campo[Math.max(0,linha-1)][i]=='s' || campo[Math.min(7,linha+1)][i]=='s') 
+                    || (campo[Math.max(0,linha-1)][i]=='c' || campo[Math.min(7,linha+1)][i]=='c')
+                    || (campo[Math.max(0,linha-1)][i]=='p' || campo[Math.min(0,linha+1)][i]=='p')){
+                    
                 return false;
             }
         }     
@@ -50,32 +54,35 @@ public class Campo {
         return linhas;
     }
     
-    public void adicionarArma(String tipo,int linha,int coluna){
+    public boolean adicionarArma(String tipo,int linha,int coluna){
         switch (tipo){
             case "submarino" -> {
                 if(this.verificarPosicao(1, linha, coluna )&& this.quantSub>0 ){
                     campo[linha][coluna] = 's';
                     this.quantSub--;
+                    return true;
                 }
                 else{
                     System.out.println("Não pode adcionar navio");
                 }
             }
             case "cruzador" ->{
-                if(this.verificarPosicao(2, linha, coluna) && this.quantCruz>0 && linha+1>7){
+                if(this.verificarPosicao(2, linha, coluna) && this.quantCruz>0 ){
                     campo[linha][coluna] = 'c';
-                    campo[linha+1][coluna] = 'c';
+                    campo[linha][coluna+1] = 'c';
                     this.quantCruz--;
+                    return true;
                 }
                 else{
                     System.out.println("Não pode adcionar navio");
                 }
             }
             case "porta-avioes" ->{
-                if(this.verificarPosicao(5, linha, coluna) && this.quantPa>0 && linha+4>7){
-                    for(int i=coluna;i<=4;i++){
-                        campo[i][coluna] = 'p';
+                if(this.verificarPosicao(5, linha, coluna) && this.quantPa>0 ){
+                    for(int i=coluna;i<=6;i++){
+                        campo[linha][i] = 'p';
                         this.quantPa--;
+                        return true;
                     }
                 }
                 else{
@@ -83,10 +90,11 @@ public class Campo {
                 }
             }
         }
+        return false;
     }
     
     public boolean verificarTiro(int linha,int coluna){
-        return campo[linha][coluna] != ' ';
+        return campo[linha][coluna] == 's' || campo[linha][coluna] == 'p' || campo[linha][coluna] == 'c' ;
     }
     
     
@@ -112,7 +120,12 @@ public class Campo {
         for (int i=0;i<campo.length;i++){
             System.out.print(" "+ this.getLinhas()[i] +" ");
             for(int j=0;j<campo[i].length;j++){
-                System.out.print("| "+ campo[i][j] + "| ");
+                if(campo[i][j]=='s' || campo[i][j]=='c' || campo[i][j]=='p'  ){
+                    System.out.print("|"+ campo[i][j] + "| ");
+                }
+                else{
+                    System.out.print("| | ");
+                }
                 
             }
             System.out.println("");
