@@ -3,13 +3,13 @@ package batalhanaval;
 public class Jogador {
     private String nome;
     private Campo meucampo;
-    private Campo campoiminigo;
+    private Campo campoinimigo;
     private int cont = 0;
 
-    public Jogador(String nome, Campo campoiminigo) {
+    public Jogador(String nome, Campo meucampo) {
         this.nome = nome;
-        this.meucampo = new Campo();
-        this.campoiminigo = campoiminigo;
+        this.meucampo = meucampo;
+        this.campoinimigo = new Campo();
     }
 
     public String getNome() {
@@ -37,16 +37,16 @@ public class Jogador {
     }
 
     public Campo getCampoiminigo() {
-        return campoiminigo;
+        return campoinimigo;
     }
 
     public void setCampoiminigo(Campo campoiminigo) {
-        this.campoiminigo = campoiminigo;
+        this.campoinimigo = campoiminigo;
     }
     
     public void registrarTiro(int linha, int coluna){
-        if(campoiminigo.verificarTiro(linha,coluna)){
-            meucampo.setPosicao(linha, coluna, campoiminigo.getPosicao(linha, coluna));
+        if(meucampo.verificarTiro(linha,coluna)){
+            campoinimigo.setPosicao(linha, coluna, meucampo.getPosicao(linha, coluna));
             System.out.println("Acertou um navio");
             cont++;
         }
