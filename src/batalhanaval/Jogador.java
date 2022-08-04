@@ -5,6 +5,7 @@ public class Jogador {
     private Campo meucampo;
     private Campo campoinimigo;
     private int cont = 0;
+    private Exception e = new Exception();
 
     public Jogador(String nome, Campo meucampo) {
         this.nome = nome;
@@ -36,22 +37,23 @@ public class Jogador {
         this.meucampo = meucampo;
     }
 
-    public Campo getCampoiminigo() {
+    public Campo getCampoinimigo() {
         return campoinimigo;
     }
 
-    public void setCampoiminigo(Campo campoiminigo) {
+    public void setCampoinimiigo(Campo campoiminigo) {
         this.campoinimigo = campoiminigo;
     }
     
-    public void registrarTiro(int linha, int coluna){
-        if(meucampo.verificarTiro(linha,coluna)){
-            campoinimigo.setPosicao(linha, coluna, meucampo.getPosicao(linha, coluna));
+    public void registrarTiro(int linha, int coluna,Campo iminigo){
+        if(e.verificarTiro(linha,coluna,iminigo.getCampo())){
+            campoinimigo.setPosicao(linha, coluna, iminigo.getPosicao(linha, coluna));
             System.out.println("Acertou um navio");
             cont++;
+            this.setCont(cont);
         }
         else{
-            meucampo.setPosicao(linha, coluna, 'o');
+            campoinimigo.setPosicao(linha, coluna, 'o');
             System.out.println("Tiro na agua");
         }
     }
