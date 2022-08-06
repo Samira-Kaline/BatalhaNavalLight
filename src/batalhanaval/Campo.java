@@ -39,10 +39,6 @@ public class Campo {
     
     public void adicionarArma(String tipo,int linha,int coluna){
         
-        if(this.cheio()){
-            System.out.println("Já foram adcionados todos os navios");
-        }
-        
         switch (tipo){
             case "submarino" -> {
                 if(e.verificarQuantNavio(quantSub)){
