@@ -14,12 +14,16 @@ public class Jogo {
         
         
         while (i<=6) {
-            String tipo,linha = null;
+            String tipo = null,linha = null;
             int coluna = -1;
         
             campo.printCampo();
             
             while (true){
+                if(campo.cheio()){
+                    System.out.println("Já foram adcionados todos os navios");
+                    break;
+                }
                 
                 System.out.println("Digite o tipo de navio que deseja adicionar: ");
                 tipo = s.next();
