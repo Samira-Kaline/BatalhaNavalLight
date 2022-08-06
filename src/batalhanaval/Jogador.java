@@ -51,7 +51,6 @@ public class Jogador {
             System.out.println("Acertou um navio");
             cont++;
             this.setCont(cont);
-            System.out.println("Nome: " + this.getNome()+ " Cont: " + this.cont);
         }
         else{
             campoinimigo.setPosicao(linha, coluna, 'o');
