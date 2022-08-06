@@ -46,6 +46,10 @@ public class BatalhaNaval {
                         System.out.println("Opss!, voce não criou jogadores, não é possivel jogar!");
                         break;
                     }
+                    else if(jogador1.venceu() || jogador2.venceu()){
+                        System.out.println("");
+                        break;
+                }
                     jogo.Jogar(jogador1, jogador2);
                     
                     System.out.println("FIM DE JOGO!");
@@ -56,10 +60,5 @@ public class BatalhaNaval {
         
         
         }
-
-        
-        
-    
-    
     }
 }
