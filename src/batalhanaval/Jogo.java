@@ -25,6 +25,10 @@ public class Jogo {
                 }
             
             while (true){
+                 if(campo.cheio()){
+                    System.out.println("Já foram adcionados todos os navios");
+                    break;
+                }
                 
                 System.out.println("Digite o tipo de navio que deseja adicionar: ");
                 tipo = s.next();
