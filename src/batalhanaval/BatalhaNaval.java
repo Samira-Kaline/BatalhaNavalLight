@@ -9,7 +9,6 @@ public class BatalhaNaval {
 
     public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
-        Exception e = new Exception();
         Jogo jogo = new Jogo();
         Jogador jogador1 = null,jogador2 = null;
         
