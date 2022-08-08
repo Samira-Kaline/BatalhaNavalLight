@@ -27,7 +27,7 @@ public class Campo {
     }
     
     public boolean cheio(){
-        return (this.quantCruz+this.quantPa+this.quantSub) !=0;
+        return (this.quantCruz+this.quantPa+this.quantSub) ==0;
     }
     
     public void setPosicao(int linha,int coluna,char valor){
