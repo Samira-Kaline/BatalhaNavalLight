@@ -69,7 +69,7 @@ public class Jogo {
             linhac = e.converter(linha);
 
             campo.adicionarArma(tipo, linhac-1, coluna-1);
-            if (campo.cheio()){
+            if (!campo.cheio()){
                 i++;
             }
             
