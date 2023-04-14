@@ -9,7 +9,7 @@ public class BatalhaNaval {
 
     public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
-        Jogo jogo = new Jogo();
+        JogoController control = new JogoController();
         Jogador jogador1 = null,jogador2 = null;
         
         
@@ -18,7 +18,7 @@ public class BatalhaNaval {
         while(op<3){
             
             
-            jogo.printMenu();
+            control.printMenu();
             op = s.nextInt();
             
             switch(op){
@@ -49,7 +49,8 @@ public class BatalhaNaval {
                         System.out.println("");
                         break;
                 }
-                    jogo.Jogar(jogador1, jogador2);
+                    Jogo jogo = new Jogo(jogador1,jogador2)
+                    control.InicarJogo(jogo);
                     
                     System.out.println("FIM DE JOGO!");
                     break;
